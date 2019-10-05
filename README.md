@@ -20,7 +20,7 @@ A simple python wrapper for [xrp-api](https://xrpl.org/xrp-api.html).
 
     # Transact methods
     transaction = api.get_transaction('<transaction_id>')
-    payment = api.submit_payment('<XRPL_source_address>', '<XRPL_destination_address>', amount, '<auth_token>')
+    payment = api.submit_payment('<XRPL_source_address>', '<XRPL_destination_address>', amount, '<api_key>')
 
     # Meta methods
     ping = api.ping()
