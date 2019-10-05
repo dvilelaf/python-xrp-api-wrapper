@@ -7,7 +7,7 @@ HttpResponses = {200: 'OK', 400: 'Bad request', 401: 'Unauthorized',
 
 class XRPAPI():
 
-    def __init__(self, node: str='http://localhost:3000', api_version=1):
+    def __init__(self, node: str='http://localhost:3000', api_version: int=1):
         self.node = node
         self.api_version = api_version
 
