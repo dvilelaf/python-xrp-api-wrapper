@@ -25,7 +25,9 @@ class XRPAPI():
                 raise ValueError('Bad request method')
 
             if response.ok:
-                return response.json()
+                response = response.json()
+                response['status'] = 'ok'
+                return response
             else:
                 return {'status': 'error',
                         'message': f'{response.status_code}: {HttpResponses[response.status_code]}'}
