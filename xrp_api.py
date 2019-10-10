@@ -33,7 +33,7 @@ class XRPAPI():
                         'message': f'{response.status_code}: {HttpResponses[response.status_code]}'}
 
         except requests.exceptions.RequestException as e:
-            return {"status": "error", "error": e}
+            return {'status': 'error', 'error': e}
         except json.JSONDecodeError:
             if response.content == b'':
                 return {'status': 'ok', 'message': 'No content'}
