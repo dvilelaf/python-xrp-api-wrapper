@@ -1,9 +1,6 @@
 import json
 import requests
 
-HttpResponses = {200: 'OK', 400: 'Bad request', 401: 'Unauthorized',
-                 403: 'Forbidden', 404: 'Not found'}
-
 
 class XRPAPI():
 
@@ -24,13 +21,10 @@ class XRPAPI():
             else:
                 raise ValueError('Bad request method')
 
-            if response.ok:
-                response = response.json()
-                response['status'] = 'ok'
-                return response
-            else:
-                return {'status': 'error',
-                        'message': f'{response.status_code}: {HttpResponses[response.status_code]}'}
+            status = 'ok' if response.ok else 'error'
+            response = response.json()
+            response['status'] = status
+            return response
 
         except requests.exceptions.RequestException as e:
             return {'status': 'error', 'error': e}
