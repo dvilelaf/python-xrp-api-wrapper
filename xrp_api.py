@@ -1,6 +1,11 @@
 import json
 import requests
 import sys
+try:
+    from MessageBox import showMessageBox
+    MessageBoxPresent = True
+except ImportError:
+    MessageBoxPresent = False
 
 
 class XRPAPI():
@@ -12,11 +17,16 @@ class XRPAPI():
         try:
             response = requests.get('https://www.google.com/', timeout=2)
         except requests.exceptions.RequestException:
-            sys.exit('Error: no Internet connection available')
+            message = 'No Internet connection available'
+            if MessageBoxPresent:
+                showMessageBox('Error', message, 'critical')
+            sys.exit('Error: ' + message)
         response = self.ping()
         if 'error' in response:
-            print('Error: XRP-API server is not running')
-            sys.exit(f'{response["error"]}')
+            message = f'XRP-API server is not running.\n{response["error"]}'
+            if MessageBoxPresent:
+                showMessageBox('Error', message, 'critical')
+            sys.exit('Error: ' + message)
 
     def _call(self, endpoint: tuple, payload: dict={},
               headers: dict={}, method: str='GET') -> dict:
