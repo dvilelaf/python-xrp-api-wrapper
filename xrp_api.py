@@ -90,7 +90,7 @@ class XRPAPI():
         return self._call(endpoint=endpoint)
 
     def submit_payment(self, source_address: str, destination_address: str,
-                       destination_tag: str, amount: float,
+                       source_tag: str, destination_tag: str, amount: float,
                        api_key: str, submit: bool=True) -> dict:
         '''Sign a payment transaction and submit it to the XRP Ledger network. The
         sending account must match an account address and secret the XRP-API server
@@ -114,6 +114,8 @@ class XRPAPI():
                    'submit': submit
                    }
 
+        if source_tag:
+            payload['payment']['source_tag'] = str(source_tag)
         if destination_tag:
             payload['payment']['desination_tag'] = str(destination_tag)
 
