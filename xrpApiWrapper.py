@@ -4,7 +4,7 @@ import requests
 
 class XRPAPI():
 
-    error = None
+    error = False
 
     def __init__(self, node: str='http://localhost:3000', api_version: int=1):
         self.node = node
